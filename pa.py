@@ -1,23 +1,46 @@
-from requests_html import HTMLSession
+import datetime
+import time
+from chinese_calendar import is_workday
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
 
-base_url = 'https://www.cnblogs.com/lfri/default.html?page='
-id = 1
 
-def get_title(url):
-    global id
-    session = HTMLSession()
-    r = session.get(url)
-    # r.html.render(scrolldown=1, sleep=0.01)  #下拉3次
-    titles = r.html.find('a.postTitle2')
-    print(len(titles))
-    with open('titles.md', 'a', encoding="utf-8") as f:  #使用utf-8编码
-        for i, title in enumerate(titles):
-            s = f'{id}. [{title.text}]({title.attrs["href"]})'
-            print(s)
-            f.write(s + '\n')
-            id = id + 1
+startDate = datetime.datetime(2022, 2, 21)
+date = datetime.datetime.now().date()
 
-if __name__ == '__main__':
-    for x in range(1, 11):
-        print('当前页面: '+ str(x))
-        get_title(base_url+str(x))
+
+if is_workday(date):
+    file = open('1', encoding= 'utf-8')
+    text = file.readline()  # 只读取一行内容
+    if text.find("|"):
+        text = text.replace('|', r'<br>-')
+        text = '-' + text
+    print(text)
+    file.close()
+
+    with open("1", "r", encoding="utf-8") as f:
+        lines = f.readlines()
+        # print(lines)
+    with open("1", "w", encoding="utf-8") as f_w:
+        for line in lines[1:]:
+            f_w.write(line)
+
+
+    msg_from = '499952297@qq.com'  # 发送方邮箱
+
+    passwd = 'hybpnudncanabgfe'  # 填入发送方邮箱的授权码
+    msg_to = ['499952297@qq.com', 'daziran96@qq.com', 'liziran2@huawei.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+
+    subject = '【' +  time.strftime('%m-%d',time.localtime(time.time())) + '】讲给禹宸的土味情话~'
+    content = text
+    msg = MIMEText(content, "html")
+    msg['Subject'] = subject
+    msg['From'] = msg_from
+    msg['To'] = Header("禹宸", 'utf-8')
+    try:
+        s = smtplib.SMTP_SSL("smtp.qq.com", 465)  # 邮件服务器及端口号
+        s.login(msg_from, passwd)
+        s.sendmail(msg_from, msg_to, msg.as_string())
+    finally:
+        s.quit()
