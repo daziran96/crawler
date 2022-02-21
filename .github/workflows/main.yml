@@ -18,24 +18,11 @@ jobs:
       
       
     - name: Install Dependence
-      run: pip install requests-html pytz
+      run: pip install chinese_calendar
     - name: Run pa.py
       run: python pa.py
-    - name: Run pa2.py
-      run: python pa2.py
     - name: list
       run: ls
-      
-    - name: Setup Node.js for use with actions
-      uses: actions/setup-node@v2.4.0
-    - name: Install Dependence
-      run: npm install
-    - name: Markdown to HTML
-      run: node md2html.js
-    - name: remove titles.md
-      run: |
-        rm titles.md
-
     
     - name: Upload to this repo
       run: |
