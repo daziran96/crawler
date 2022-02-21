@@ -4,7 +4,7 @@ base_url = 'https://www.cnblogs.com/lfri/default.html?page='
 id = 1
 
 def get_title(url):
-    global id #在函数内部修改全局变量的值，要先用global声明全局变量。
+    global id
     session = HTMLSession()
     r = session.get(url)
     # r.html.render(scrolldown=1, sleep=0.01)  #下拉3次
