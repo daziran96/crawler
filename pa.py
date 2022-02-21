@@ -30,14 +30,14 @@ if is_workday(date):
     msg_from = '499952297@qq.com'  # 发送方邮箱
 
     passwd = 'hybpnudncanabgfe'  # 填入发送方邮箱的授权码
-    msg_to = ['499952297@qq.com', 'daziran96@qq.com', 'liziran2@huawei.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+    msg_to = ['499952297@qq.com', 'liu.sophie@cummins.com', 'liziran2@huawei.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
     subject = '【' +  time.strftime('%m-%d',time.localtime(time.time())) + '】讲给禹宸的土味情话~'
     content = text
     msg = MIMEText(content, "html")
     msg['Subject'] = subject
     msg['From'] = msg_from
-    msg['To'] = Header("禹宸", 'utf-8')
+    msg['To'] = Header("Sophie Liu", 'utf-8')
     try:
         s = smtplib.SMTP_SSL("smtp.qq.com", 465)  # 邮件服务器及端口号
         s.login(msg_from, passwd)
