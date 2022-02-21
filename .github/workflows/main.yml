@@ -1,9 +1,14 @@
 name: CI
 
 on:
-#   schedule:
-#      - cron: '0,30 * * * *'  
   push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: 0 7 * * *
+  watch:
+    types: started
 
 jobs:
   job_1:
