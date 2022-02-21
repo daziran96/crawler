@@ -39,8 +39,8 @@ jobs:
     
     - name: Upload to this repo
       run: |
-        git config --global user.name "growvv"
-        git config --global user.email "2092876368@qq.com"
+        git config --global user.name "daziran96"
+        git config --global user.email "499952297@qq.com"
         git add index.html  record.html record.md && echo A
         git commit -m 'upload pa result' && echo B
         git push -u origin master && echo C
