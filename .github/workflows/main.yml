@@ -28,7 +28,7 @@ jobs:
       run: |
         git config --global user.name "daziran96"
         git config --global user.email "499952297@qq.com"
-        git add index.html  record.html record.md && echo A
+        git add 1 && echo A
         git commit -m 'upload pa result' && echo B
         git push -u origin master && echo C
         
